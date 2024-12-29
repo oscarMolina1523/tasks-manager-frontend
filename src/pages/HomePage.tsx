@@ -3,13 +3,14 @@ import { Label } from "@/components/ui/label";
 import { useTaskContext } from "@/context/TaskContext";
 import CreateTaskComponent from "@/shared/CreateTask";
 import TaskPreviewComponent from "@/shared/TaskPreview";
+import TaskPreviewSkeleton from "@/shared/TaskPreviewSkeleton";
 import { Plus } from "lucide-react";
 import React, { useState } from "react";
 
 const HomePage: React.FC = () => {
   const { tasks, loading, error } = useTaskContext();
   const [show, setShow] = useState<boolean>(false);
-  const [filter, setFilter] = useState<string>("all"); 
+  const [filter, setFilter] = useState<string>("all");
 
   const handleCreateTask = () => {
     setShow(!show);
@@ -19,17 +20,16 @@ const HomePage: React.FC = () => {
     setFilter(newFilter);
   };
 
-  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   const filteredTasks = tasks.filter((task) => {
     if (filter === "completed") {
-      return task.completed === true; 
+      return task.completed === true;
     }
     if (filter === "in progress") {
-      return task.completed === false; 
+      return task.completed === false;
     }
-    return true; 
+    return true;
   });
 
   return (
@@ -55,18 +55,24 @@ const HomePage: React.FC = () => {
         </div>
         <div className="flex flex-row items-center gap-2 px-2 justify-center">
           <Button onClick={handleCreateTask} className="bg-green text-surface-neutral hover:text-green hover:bg-surface-neutral hover:border hover:border-green">
-            <Plus className="h-6 w-6"/>
+            <Plus className="h-6 w-6" />
             New Task
           </Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 items-center w-full px-2 gap-2">
-          {filteredTasks.map((task) => (
+          {loading ? (
+            Array.from({ length: 5 }, (_, index) => (
+              <div key={index}>
+                <TaskPreviewSkeleton />
+              </div>
+            ))
+          ) : filteredTasks.map((task) => (
             <div key={task._id} className="w-full h-full">
-              <TaskPreviewComponent task={task}/>
+              <TaskPreviewComponent task={task} />
             </div>
           ))}
         </div>
-        <CreateTaskComponent show={show} onClose={handleCreateTask}/>
+        <CreateTaskComponent show={show} onClose={handleCreateTask} />
       </main>
     </>
   );
