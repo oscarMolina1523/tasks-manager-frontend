@@ -13,6 +13,7 @@ export default {
       "degree-grass": "#E3F2FF",
       "black": "#24252C",
       "gray": "#878490",
+      "degree-gray": "#E0E0E0",
       "red": "#FF0000",
       "surface-neutral": "#FFFFFF",
       "degree-blue": "#EEE9FF",
