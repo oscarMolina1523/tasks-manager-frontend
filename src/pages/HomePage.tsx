@@ -7,16 +7,30 @@ import { Plus } from "lucide-react";
 import React, { useState } from "react";
 
 const HomePage: React.FC = () => {
-
-  const {tasks, loading, error} =useTaskContext();
+  const { tasks, loading, error } = useTaskContext();
   const [show, setShow] = useState<boolean>(false);
-  
-    const handleCreateTask = () => {
-      setShow(!show);
-    }
+  const [filter, setFilter] = useState<string>("all"); 
+
+  const handleCreateTask = () => {
+    setShow(!show);
+  };
+
+  const handleFilterChange = (newFilter: string) => {
+    setFilter(newFilter);
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
+
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "completed") {
+      return task.completed === true; 
+    }
+    if (filter === "in progress") {
+      return task.completed === false; 
+    }
+    return true; 
+  });
 
   return (
     <>
@@ -35,18 +49,18 @@ const HomePage: React.FC = () => {
       </header>
       <main className="flex flex-col gap-4 items-center h-full pb-4">
         <div className="flex flex-row items-center gap-2 px-2 justify-center">
-          <Button className="bg-degree-blue text-blue hover:text-surface-neutral hover:bg-blue ">All</Button>
-          <Button className="bg-degree-blue text-blue hover:text-surface-neutral hover:bg-blue">In Progress</Button>
-          <Button className="bg-degree-blue text-blue hover:text-surface-neutral hover:bg-blue">Completed</Button>
+          <Button onClick={() => handleFilterChange("all")} className="bg-degree-blue text-blue hover:text-surface-neutral hover:bg-blue">All</Button>
+          <Button onClick={() => handleFilterChange("in progress")} className="bg-degree-blue text-blue hover:text-surface-neutral hover:bg-blue">In Progress</Button>
+          <Button onClick={() => handleFilterChange("completed")} className="bg-degree-blue text-blue hover:text-surface-neutral hover:bg-blue">Completed</Button>
         </div>
         <div className="flex flex-row items-center gap-2 px-2 justify-center">
-        <Button onClick={handleCreateTask} className="bg-green text-surface-neutral hover:text-green hover:bg-surface-neutral hover:border hover:border-green">
-          <Plus className="h-6 w-6"/>
-          New Task
-        </Button>
+          <Button onClick={handleCreateTask} className="bg-green text-surface-neutral hover:text-green hover:bg-surface-neutral hover:border hover:border-green">
+            <Plus className="h-6 w-6"/>
+            New Task
+          </Button>
         </div>
-        <div className="flex flex-col items-center w-full px-2  gap-2">
-          {tasks.map((task) => (
+        <div className="flex flex-col items-center w-full px-2 gap-2">
+          {filteredTasks.map((task) => (
             <div key={task._id} className="w-full h-full">
               <TaskPreviewComponent task={task}/>
             </div>
