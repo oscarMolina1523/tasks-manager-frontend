@@ -23,6 +23,7 @@ const CreateTaskComponent: React.FC<CreateTaskComponentProps> = ({ show, onClose
 
   const handleCreateTask = async () => {
     await createTask({
+      _id: "innecessary",
       title,
       description,
       createdAt: date,
@@ -32,14 +33,20 @@ const CreateTaskComponent: React.FC<CreateTaskComponentProps> = ({ show, onClose
     onClose();
   }
 
+  const cleanForm=()=>{
+    setTitle("");
+    setDescription("");
+    onClose();
+  }
+
   const isSaveDisabled = title.trim() === "" || description.trim() === "";
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center overflow-y-auto bg-gray bg-opacity-40 z-50">
       <Card className="w-full md:w-1/2 mt-20 bg-surface-neutral border-none">
         <CardTitle className="flex flex-row items-center justify-between px-4 py-4 border-b-2 border-black text-black">
-          <Label className="text-[1.2rem]">Create Task</Label>
-          <X onClick={onClose} />
+          <Label className="text-[1.2rem] tracking-wide">Create Task</Label>
+          <X onClick={cleanForm} />
         </CardTitle>
         <CardContent className="p-2">
           <div className="flex flex-col px-4 py-4 gap-2">
@@ -48,7 +55,7 @@ const CreateTaskComponent: React.FC<CreateTaskComponentProps> = ({ show, onClose
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className=" border border-black h-[3rem] text-black"
+              className=" border border-black h-[3rem] text-black bg-degree-grass"
               placeholder="Task title..."
             />
           </div>
@@ -58,7 +65,7 @@ const CreateTaskComponent: React.FC<CreateTaskComponentProps> = ({ show, onClose
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className=" border border-black h-[3rem] text-black"
+              className=" border border-black h-[3rem] text-black bg-degree-grass"
               placeholder="Task description..."
             />
           </div>
@@ -72,7 +79,7 @@ const CreateTaskComponent: React.FC<CreateTaskComponentProps> = ({ show, onClose
             Save
           </Button>
           <Button className="text-surface-neutral h-[3rem] text-[1.2rem] bg-red font-semibold hover:text-red hover:bg-surface-neutral"
-            onClick={onClose}>Cancel</Button>
+            onClick={cleanForm}>Cancel</Button>
         </div>
       </Card>
     </div>
