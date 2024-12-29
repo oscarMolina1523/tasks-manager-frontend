@@ -70,9 +70,9 @@ const TaskPreviewComponent: React.FC<TaskPreviewComponentProps> = ({ task }) => 
             </Button>
             <AlertDialog>
               <AlertDialogTrigger>
-              <Button className="bg-red border-none text-surface-neutral">
+              <div className="bg-red border-none text-surface-neutral w-full rounded-md py-2 px-3">
                 <Trash className="h-6 w-6" />
-              </Button>
+              </div>
                 </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
