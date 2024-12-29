@@ -34,8 +34,8 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <header className="w-full h-[6rem] flex flex-row items-center justify-start p-3 ">
-        <nav className="w-full h-full flex flex-row gap-2">
+      <header className="w-full  h-[6rem] flex flex-row items-center justify-start md:justify-center p-3 ">
+        <nav className="w-full h-full flex flex-row gap-2 md:w-1/4 md:items-center md:justify-around">
           <div className="flex overflow-hidden aspect-circle rounded-full h-full p-1">
             <img className="object-cover rounded-full"
               src="https://w0.peakpx.com/wallpaper/854/533/HD-wallpaper-chinese-girl-asian-flower-face-art-luminos-smile-fantasy-profile-girl-purple-peter-xiao-chinese-portrait.jpg"
@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
             New Task
           </Button>
         </div>
-        <div className="flex flex-col items-center w-full px-2 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center w-full px-2 gap-2">
           {filteredTasks.map((task) => (
             <div key={task._id} className="w-full h-full">
               <TaskPreviewComponent task={task}/>
