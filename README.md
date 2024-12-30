@@ -2,7 +2,7 @@
 
 ###
 
-<p align="left">Este proyecto es el frontend de la aplicación Task Manager, que permite gestionar tareas con una interfaz moderna e intuitiva. Fue desarrollado utilizando React.js con Tailwind CSS y Fetch API para la comunicación con el backend.</p>
+<p align="left">Este proyecto es el frontend de la aplicación Task Manager, que permite gestionar tareas con una interfaz moderna e intuitiva. Fue desarrollado utilizando React.js con Tailwind CSS y Fetch API para la comunicación con el backend. Cuenta con autenticaciones de usuarios y protecciones de datos.</p>
 
 ###
 
