@@ -8,7 +8,7 @@ import { Plus } from "lucide-react";
 import React, { useState } from "react";
 
 const HomePage: React.FC = () => {
-  const { tasks, loading, error } = useTaskContext();
+  const { tasks, loading } = useTaskContext();
   const [show, setShow] = useState<boolean>(false);
   const [filter, setFilter] = useState<string>("all");
 
@@ -20,7 +20,6 @@ const HomePage: React.FC = () => {
     setFilter(newFilter);
   };
 
-  if (error) return <div>{error}</div>;
 
   const filteredTasks = tasks.filter((task) => {
     if (filter === "completed") {
