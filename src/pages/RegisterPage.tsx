@@ -33,7 +33,7 @@ const RegisterPage: React.FC = () => {
 
       await AuthService.register(email, password);
 
-      navigate("/home");
+      navigate("/login");
     } catch {
       setError(true);
     }
